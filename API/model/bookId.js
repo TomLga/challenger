@@ -1,1 +1,6 @@
-// book ids
+class BookID {
+
+
+}
+
+module.exports = BookID
