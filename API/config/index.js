@@ -10,6 +10,7 @@ const connection = createPool({
     password:process.env.dbPwd,
     multipleStatements: true,
     connectionLimit:30
+   
 
 })
 

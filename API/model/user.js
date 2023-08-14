@@ -1,7 +1,10 @@
 // users from the table?
 // maye from the datebase
-// need to import our db con
+// need to import our db config
 const db = require("../config") //this imprt the db con from config
+const{hash, compare, hashSync} = require('bcrypt~~') //hash meth
+const {createToken} = require('../middleware/authication') //importing function
+
 
 class User{
     fetchUsers(req, res){ //to fetch all users
@@ -33,11 +36,40 @@ class User{
         })
     }
     login(req, res){
-
+        
     }
-    register(req, res){
+    async register(req, res) {
+        const data = req.body;
+        // Encrypt password
+        data.userPass = await hash(data.userPass, 15); // 15 is the value for salt
+      
+        // Payload = data coming from the user
+        const user = {
+          emailAdd: data.emailAdd,
+          userPass: data.userPass
+        };
+        // Query to insert data
+        const query = `
+          INSERT INTO users 
+          SET ? 
+        `;      
+        // Inserting a new user
+        db.query(query, [data], (err) => {
+          if (err) throw err;      
+          // Creating a token with the variables we created
+          const token = createToken(user);      
+          res.cookie("LegitUser", token, { //name of cookie, varName, length of time 
+            maxAge: 3600000, //3 days until token expires 
+            httpOnly: true, // Only accessible by the browser
+          });      
 
-    }
+          res.json({
+            status: res.statusCode,
+            msg: "You are now registered"
+          })
+        })
+      }
+      
     updateUser(req, res){
         const query = `
         UPDATE FROM users
@@ -78,7 +110,14 @@ module.exports = {User}
  * 
  * WHERE userID =?; also can be where userID = ${req.params.id};
  * 
- * if you exportign a lot of stff we use module.exports = {User} 
+ * if you exporting a lot of stuff we use module.exports = {User} 
  * single = user
+ * 
+ * const{hash, compare, hashSync} = require('bcrypt~~') //hash meth
+// use the hash fun to encrypt the pswd
+*
+*
+*
+*
  */
 
