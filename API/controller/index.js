@@ -8,7 +8,7 @@ const {user} = require('../model') //importg model object using destructing
 // setting up the controller 
 //  ======USER ROUTER======
 routes.get('/users',(req, res) =>{
-    user.fetchUsers(req, res) //to fetch user from the db 
+    user.fetchUsers(req, res) //to fetch user from the db  //user is the file name thaat its coming from 
 })
 routes.get('/user/:id',(req, res) =>{
     user.fetchUser(req, res)
