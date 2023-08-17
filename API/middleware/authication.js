@@ -12,14 +12,26 @@
         })
     }
 
-    module.exports = {
-        createToken
-    }
-    // middleware 
-    // function verifyToken(req, res, NEXT){
-    //     const token= req.headers["authorization"]
-    // }
+    function verifyAToken(req, res, next){
+        //To prevent undefined error, place ?. before your property.       
+       try{
+            // Retrieve token from req.headers
+            console.log("Get token from req.headers['authorization']");
+            const token = req.headers["authorization"]
+            console.log(token);
+            next()
+       }catch(e){
+            res.json({
+                status: res.statusCode,
+                msg: e.message
+            })
+       }}
 
+    module.exports = {
+        createToken,
+        verifyAToken
+    }
+ 
 
     /**
      * sign = create a token and sign off the user
@@ -28,4 +40,7 @@
      * 
      * NEXT = tells us it is a middleware function (27:30 rec)
      */
+
+
+
 
