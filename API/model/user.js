@@ -61,7 +61,9 @@ class User{
           INSERT INTO users 
           SET ?; 
         `;      
-        // Inserting a new user
+        // Inserting a new 
+        
+        
         db.query(query, [data], (err) => {
           if (err) throw err;      
           // Creating a token with the variables we created
