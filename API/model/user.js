@@ -67,11 +67,11 @@ class User{
         db.query(query, [data], (err) => {
           if (err) throw err;      
           // Creating a token with the variables we created
-          const token = createToken(user);      
-          res.cookie("LegitUser", token, { //name of cookie, varName, length of time 
-            maxAge: 3600000, //3 days until token expires 
-            httpOnly: true, // Only accessible by the browser
-          });      
+          // const token = createToken(user);      
+          // res.cookie("LegitUser", token, { //name of cookie, varName, length of time 
+          //   maxAge: 3600000, //3 days until token expires 
+          //   httpOnly: true, // Only accessible by the browser
+          // });      
 
           res.json({
             status: res.statusCode,
