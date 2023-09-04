@@ -20,7 +20,7 @@ export default createStore({
     setUsers(state, users) {
       state.users = users
     },
-    setUses(state, user) {
+    setUser(state, user) {
       state.user = user
     },
     setProducts(state, products) {
